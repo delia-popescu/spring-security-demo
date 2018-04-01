@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+table, th, td {
+	border: 1px solid black;
+}
+</style>
+<body>
+	<a href="/login?logout">Logout</a>
+	<h1 th:text="#{list.persons.title}">Manage persons</h1>
+	<table style="width: 100%;">
+		<tr>
+			<th align="left">Id</th>
+			<th align="left">Name</th>
+		</tr>
+		<tr th:each="person : ${persons}">
+			<td><a href="/persons/1>"
+				th:href="@{/persons/{path}(path=${person.id})}" th:text=${person.id}>Car</a></td>
+			<td th:text="${person.firstName + ' ' + person.lastName}">Name</td>
+			<td>
+				<form th:object="${person}"
+					th:action="@{/persons/{path}(path=${person.id})}"
+					th:method="delete">
+					<input type="submit" value="Delete" th:value="#{delete.label}" />
+				</form>
+			</td>
+		</tr>
+	</table>
+	<a th:href="@{/persons/new}"><p th:text="#{person.new}">New person</p></a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Person</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:if="${person != null}">
+		<h1 th:text="#{person.edit}">New/Edit person</h1>
+		<form action="#" th:action="@{/persons}" th:object="${person}"
+			method="POST">
+			<p>
+				<input type="hidden" th:field="*{id}" />
+			</p>
+			<p>
+				First name: <input type="text" th:field="*{firstName}" />
+			</p>
+			<ul style="color:red">
+				<li th:each="err : ${#fields.errors('*{firstName}')}" th:text="${err}" />
+			</ul>
+			<p>
+				Last name: <input type="text" th:field="*{lastName}" />
+			</p>
+			<ul style="color:red">
+				<li th:each="err : ${#fields.errors('*{lastName}')}" th:text="${err}" />
+			</ul>
+			<p>
+				<input type="submit" value="Save" /> <input type="reset"
+					value="Reset" />
+			</p>
+		</form>
+	</div>
+	<div th:if="${person == null}">
+		<h1>Person not found!</h1>
+	</div>	
+	<a href="/persons" th:href="@{/persons}">Person list</a>
+</body>
+</html>

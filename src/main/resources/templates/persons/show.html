@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:if="${person != null}" th:text="${person.firstName + ' ' + person.lastName}">Person name</p>
+    <p th:if="${person == null}">Person not found</p>
+    <a href="/persons" th:href="@{/persons}">All persons</a>
+</body>
