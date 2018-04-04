@@ -12,21 +12,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
             .authorizeRequests()
-            .antMatchers("/index.html").permitAll()
-            .antMatchers("/persons/**").hasRole("ADMIN")
+            	.antMatchers("/index.html").permitAll()
+            	.antMatchers("/persons/**").hasRole("ADMIN")
+            	.and()
+            .httpBasic()
             .and()
             .formLogin()
             .loginPage("/login")
             .defaultSuccessUrl("/persons")
-            .permitAll()
             .and()
-                //            .exceptionHandling().accessDeniedPage("/login")
-            .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+            .exceptionHandling().accessDeniedPage("/login")
+//            .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
             .and()
-            .logout()
-            .permitAll();
+            .logout().permitAll();
     }
 
     @Override
